@@ -4,6 +4,9 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import * as yup from 'yup';
 import { withFormik } from 'formik'
 import InnerLoginForm from "@/app/components/auth/InnerLoginForm";
+import { handleApiError } from "@/libs/helpers/errorHandler";
+import { CallApi } from "@/libs/helpers/callApi";
+import { toast } from "react-hot-toast";
 
 interface LoginFormProps {
  router:AppRouterInstance
@@ -26,8 +29,21 @@ export const LoginForm = withFormik<LoginFormProps, LoginFormValues>({
   rememberMe: false,
  }),
  validationSchema,
- handleSubmit: (values, { props }) => {
+ handleSubmit: async(values, { props }) => {
     
+    try {
+        const response = await CallApi().post('/admin/login', {
+            username: values.username,
+            password: values.password,
+            rememberMe: values.rememberMe ? 'on' : 'off'
+        })
+        if(response.status === 200){
+            toast.success('ورود با موفقیت انجام شد')
+            props.router.push('/')
+        }
+    } catch (error) {
+        handleApiError(error)
+    }
  },
  
 })(InnerLoginForm);
