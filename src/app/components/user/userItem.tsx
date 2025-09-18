@@ -54,7 +54,7 @@ export default function UserItem({user}: {user: User}) {
                 {user.fullname}
               </p>
                 :
-                <p className="font-bold text-gray-900 text-sm sm:text-base">
+                <p className="font-bold text-red-500 text-xs sm:text-base">
                 تعریف نشده
               </p>
             }
