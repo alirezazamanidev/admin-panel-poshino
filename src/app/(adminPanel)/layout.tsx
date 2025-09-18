@@ -1,5 +1,7 @@
+import { NuqsAdapter } from "nuqs/adapters/next";
 import HeaderLayout from "../components/layouts/headerLayout";
 import SidebarLayout from "../components/layouts/sideBarlayout";
+import { Suspense } from "react";
 
 
 export default function AdminPanelLayout({ children }: { children: React.ReactNode }) {
@@ -9,7 +11,10 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
             <SidebarLayout />
             <div className="flex-1">
                 <HeaderLayout />
-                {children}
+                <Suspense>
+                <NuqsAdapter>{children}</NuqsAdapter>
+
+                </Suspense>
             </div>
         </main>
     )

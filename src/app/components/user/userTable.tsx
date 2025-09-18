@@ -18,7 +18,7 @@ export default function UserTable() {
 
     const { data, isLoading, error ,meta} = usePaginatedFeach<User>('/admin/user/list',{
         page,
-        limit: 10,
+        limit: 5,
         search,
         status,
         
