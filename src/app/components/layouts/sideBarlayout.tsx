@@ -102,7 +102,7 @@ export default function SidebarLayout() {
               <div className="p-3 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300 group-hover:shadow-md">
                 <item.icon className="w-6 h-6 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
               </div>
-              <span className="font-semibold text-gray-700 group-hover:text-gray-900 transition-colors duration-300 text-lg">
+              <span className="font-semibold text-gray-700 group-hover:text-gray-900 transition-colors duration-300 text-lg mr-3">
                 {item.title}
               </span>
             </Link>

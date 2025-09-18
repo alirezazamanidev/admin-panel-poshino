@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import { Vazirmatn } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
+import { NuqsAdapter } from 'nuqs/adapters/next';
 
 export const metadata: Metadata = {
   title: 'poshino Admin Panel',
-  description: 'poshino online shop'
+  description: 'poshino online shop',
 };
 
 export default function RootLayout({
@@ -15,8 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-   
-      <body >
+      <body>
         <Toaster
           position="top-center"
           reverseOrder={false}
@@ -44,7 +44,7 @@ export default function RootLayout({
             },
           }}
         />
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   );

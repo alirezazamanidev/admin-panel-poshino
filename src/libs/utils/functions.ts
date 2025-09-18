@@ -19,3 +19,6 @@ export function debounce<T extends (...args: any[]) => void>(func: T, wait: numb
 export const formatDateNow = (date: Date) => {
   return moment(date).fromNow();
 };
+export const formatDate = (date: Date) => {
+  return moment(date).format('jYYYY/jMM/jDD');
+};
