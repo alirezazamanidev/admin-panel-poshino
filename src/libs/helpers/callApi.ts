@@ -14,6 +14,7 @@ export const CallApi = () => {
     timeout: 10000,
     withCredentials: true,
   });
+
   axiosInstance.interceptors.request.use(
     (config) => {
       config.withCredentials = true;

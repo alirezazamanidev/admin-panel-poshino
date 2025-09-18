@@ -16,17 +16,18 @@ import { useState } from 'react';
 
 const menuItems = [
   {
-    id: 'users',
-    title: 'کاربران',
-    icon: Users,
-    href: '/users',
-  },
-  {
     id: 'dashboard',
     title: 'داشبورد',
     icon: LayoutDashboard,
     href: '/',
   },
+  {
+    id: 'users',
+    title: 'کاربران',
+    icon: Users,
+    href: '/users',
+  },
+ 
   {
     id: 'products',
     title: 'محصولات',

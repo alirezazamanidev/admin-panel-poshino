@@ -83,14 +83,7 @@ export default function InnerLoginForm({ isSubmitting }: FormikProps<any>) {
             مرا به خاطر بسپار
           </label>
         </div>
-        <div className="text-sm">
-          <a
-            href="#"
-            className="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200"
-          >
-            رمز عبور را فراموش کرده‌اید؟
-          </a>
-        </div>
+        
       </div>
 
       {/* Submit Button */}
