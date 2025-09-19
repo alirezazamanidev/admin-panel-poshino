@@ -56,6 +56,7 @@ export function usePaginatedFeach<T>(
   });
 
   const url = `${endpoint}?${searchParams.toString()}`;
+
   const { data, error, isLoading, mutate } = useSWR(url, fetcher, {
     ...defaultConfig,
     ...config,

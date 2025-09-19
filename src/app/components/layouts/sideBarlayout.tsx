@@ -69,8 +69,7 @@ export default function SidebarLayout() {
 
       {/* Sidebar */}
       <div
-        className={`
-        fixed lg:static inset-y-0 right-0 z-50 w-80 bg-white/95 backdrop-blur-xl shadow-2xl transform transition-all duration-500 ease-out border-l border-gray-200/50
+        className={`fixed top-0 right-0 h-screen z-50 w-full lg:w-80 bg-white/95 backdrop-blur-xl shadow-2xl transform transition-all duration-500 ease-out border-l border-gray-200/50
         ${sidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
       `}
       >
@@ -90,7 +89,7 @@ export default function SidebarLayout() {
         </div>
 
         {/* Navigation Menu */}
-        <nav className="p-6 space-y-3 overflow-y-auto h-full pb-32">
+        <nav className="p-6 space-y-1 overflow-y-auto h-full pb-32">
           {menuItems.map((item, index) => (
             <Link
               key={item.id}

@@ -7,15 +7,18 @@ import { Suspense } from "react";
 export default function AdminPanelLayout({ children }: { children: React.ReactNode }) {
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
             <SidebarLayout />
-            <div className="flex-1">
+            
+            {/* Main Content Area */}
+            <div className="lg:mr-80 transition-all duration-300">
                 <HeaderLayout />
-                <Suspense>
-                <NuqsAdapter>{children}</NuqsAdapter>
-
-                </Suspense>
+                <main className="min-h-screen">
+                    <Suspense>
+                        <NuqsAdapter>{children}</NuqsAdapter>
+                    </Suspense>
+                </main>
             </div>
-        </main>
+        </div>
     )
 }
