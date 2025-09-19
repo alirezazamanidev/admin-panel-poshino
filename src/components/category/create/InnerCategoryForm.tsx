@@ -41,9 +41,11 @@ export function InnerCategoryForm({
     }
   }, [category]);
 
-  const { data: categories, isLoading: isCategoriesLoading } = useFeacher<
+  let { data: categories, isLoading: isCategoriesLoading } = useFeacher<
     Category[]
   >('/admin/category/categories');
+
+  categories=categories?.filter((cate)=>cate.id!==category?.id)
   return (
     <Form className="space-y-8 relative z-10">
       {/* Name Field */}
@@ -100,7 +102,7 @@ export function InnerCategoryForm({
           className="block text-sm font-bold text-gray-900 mb-3  items-center space-x-2 space-x-reverse"
         >
           <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></span>
-          <span>دسته‌بندی والد (اختیاری)</span>
+          <span>دسته‌بندی والد *</span>
         </label>
         <div className="relative">
           <select
@@ -114,9 +116,9 @@ export function InnerCategoryForm({
             {isCategoriesLoading ? (
               <option value="">در حال بارگذاری...</option>
             ) : (
-              categories?.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
+              categories?.map((cate) => (
+                <option key={cate.id} value={cate.id}>
+                  {cate.name}
                 </option>
               ))
             )}
@@ -200,7 +202,7 @@ export function InnerCategoryForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 text-white font-black rounded-2xl hover:from-blue-600 hover:via-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="inline-flex mr-4 items-center px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 text-white font-black rounded-2xl hover:from-blue-600 hover:via-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <FolderPlus className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-300" />
