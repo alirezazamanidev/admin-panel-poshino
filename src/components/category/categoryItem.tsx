@@ -2,11 +2,12 @@ import { Category } from '@/libs/models/category';
 import { formatDate } from '@/libs/utils/functions';
 import { Edit, FolderTree, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
+import { Tooltip } from 'react-tooltip';
 
 export function CategoryItem({
   category,
-  categoryMutate,
 }: {
   category: Category;
 
@@ -18,6 +19,11 @@ export function CategoryItem({
     return {
       paddingRight: `${level * 2 + 1}rem`,
     };
+  };
+
+  const truncateText = (text: string, maxLength: number = 50) => {
+    if (!text) return '-';
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   };
 
   return (
@@ -52,9 +58,34 @@ export function CategoryItem({
 
       {/* Description */}
       <td className="px-4 sm:px-6 py-3 sm:py-4">
-        <p className="text-xs sm:text-sm text-gray-600 max-w-xs truncate">
-          {category.description ||'-'}
-        </p>
+        <div className="max-w-xs">
+          <p 
+            className="text-xs sm:text-sm text-gray-600 cursor-help"
+            data-tooltip-id={`description-${category.id}`}
+            data-tooltip-content={category.description || 'توضیحات موجود نیست'}
+          >
+            {truncateText(category.description)}
+          </p>
+          
+          {category.description && (
+            <Tooltip
+              id={`description-${category.id}`}
+              place="top"
+              style={{
+                backgroundColor: '#1f2937',
+                color: '#ffffff',
+                borderRadius: '8px',
+                padding: '8px 12px',
+                fontSize: '12px',
+                maxWidth: '300px',
+                wordWrap: 'break-word',
+                whiteSpace: 'normal',
+                lineHeight: '1.4',
+                zIndex: 9999
+              }}
+            />
+          )}
+        </div>
       </td>
 
      
@@ -75,9 +106,9 @@ export function CategoryItem({
       {/* Actions */}
       <td className="px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center space-x-1 sm:space-x-2 space-x-reverse">
-          <button className="p-1.5 sm:p-2 cursor-pointer rounded-lg sm:rounded-xl hover:bg-blue-50 transition-all duration-200 hover:scale-105 group">
+          <Link href={`/categories/edit/${category.id}`} className="p-1.5 sm:p-2 cursor-pointer rounded-lg sm:rounded-xl hover:bg-blue-50 transition-all duration-200 hover:scale-105 group">
             <Edit className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 group-hover:text-blue-500" />
-          </button>
+          </Link>
       
         </div>
       </td>

@@ -1,7 +1,8 @@
-import { InnerCategoryForm } from '@/app/components/category/create/InnerCategoryForm';
+import { InnerCategoryForm } from '@/components/category/create/InnerCategoryForm';
 import { createCategory } from '@/libs/services/category';
 import { withFormik } from 'formik';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 export interface CreateCategoryFormProps {
   router: AppRouterInstance;
@@ -30,10 +31,11 @@ const CreateCategoryForm = withFormik<
     parentId: Yup.string().optional(),
     image: Yup.mixed().optional(),
   }),
-  handleSubmit: async(values, { props }) => {
+  handleSubmit: async (values, { props }) => {
     await createCategory(values);
     props.router.push('/categories');
+    toast.success('دسته‌بندی با موفقیت ایجاد شد');
   },
-})(InnerCategoryForm)
+})(InnerCategoryForm);
 
 export default CreateCategoryForm;

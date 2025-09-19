@@ -81,9 +81,11 @@ export default function UserTable() {
                 <p className="text-xs sm:text-sm text-gray-600">
                   نمایش {data?.length || 0} کاربر
                 </p>
+              {meta?.pageCount && meta?.pageCount > 1 && (
                 <div className="flex items-center space-x-2 space-x-reverse">
                   <PaginationComponent currentPage={meta?.page || 1} totalPages={meta?.pageCount || 1} onPageChange={onPageChange} />
                 </div>
+              )}
               </div>
             </div>
           </div>

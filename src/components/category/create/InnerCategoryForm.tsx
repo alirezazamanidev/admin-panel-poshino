@@ -6,7 +6,7 @@ import { Upload } from 'lucide-react';
 import { X } from 'lucide-react';
 
 import { Category } from '@/libs/models/category';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFeacher } from '@/libs/hooks/useFeacher';
 
 interface InnerCategoryFormProps extends FormikProps<any> {
@@ -35,10 +35,15 @@ export function InnerCategoryForm({
     setImagePreview(null);
     setFieldValue('image', null);
   };
+  useEffect(() => {
+    if (category) {
+      setImagePreview(category.imageUrl);
+    }
+  }, [category]);
 
   const { data: categories, isLoading: isCategoriesLoading } = useFeacher<
     Category[]
-  >('/admin/category/list');
+  >('/admin/category/categories');
   return (
     <Form className="space-y-8 relative z-10">
       {/* Name Field */}
@@ -101,7 +106,7 @@ export function InnerCategoryForm({
           <select
             id="parentId"
             name="parentId"
-            value={values.parentId}
+            value={values?.parentId || ''}
             onChange={handleChange}
             className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-300 text-right bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md group-hover:border-gray-300 appearance-none"
           >
@@ -164,14 +169,6 @@ export function InnerCategoryForm({
                   />
                 </div>
                 <div className="flex-1">
-                  <p className="text-base font-bold text-gray-900 mb-1">
-                    {selectedImage?.name}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {selectedImage &&
-                      (selectedImage.size / 1024 / 1024).toFixed(2)}{' '}
-                    MB
-                  </p>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full w-full"></div>
                   </div>
@@ -207,9 +204,15 @@ export function InnerCategoryForm({
         >
           <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <FolderPlus className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-300" />
-          <span className="relative z-10">
-            {isSubmitting ? 'در حال ایجاد...' : 'ایجاد دسته‌بندی'}
-          </span>
+          {category ? (
+            <span className="relative z-10">
+              {isSubmitting ? 'در حال ویرایش...' : 'ویرایش دسته‌بندی'}
+            </span>
+          ) : (
+            <span className="relative z-10">
+              {isSubmitting ? 'در حال ایجاد...' : 'ایجاد دسته‌بندی'}
+            </span>
+          )}
         </button>
       </div>
     </Form>

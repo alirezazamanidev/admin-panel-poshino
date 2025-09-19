@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental:{
+    globalNotFound:true
+  },
   images: {
     remotePatterns: [
       {
@@ -8,7 +11,10 @@ const nextConfig: NextConfig = {
         hostname: "c517675.parspack.net",
         pathname: "/c517675/**", 
       },
+      
     ],
+    unoptimized:true,
+    minimumCacheTTL:60*60*24
   },
 };
 

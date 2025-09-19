@@ -14,14 +14,11 @@ import {
   Shield,
   ShieldCheck,
 } from 'lucide-react';
-import UserTable from '@/app/components/user/userTable';
+import UserTable from '@/components/user/userTable';
 
 // نمونه داده‌های کاربران
 
-
 export default function UsersPage() {
-
-
   return (
     <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       {/* Header Section */}
@@ -43,7 +40,6 @@ export default function UsersPage() {
         </div>
       </div>
 
-    
       {/* Users Table - Desktop */}
       <UserTable />
     </div>

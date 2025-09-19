@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoryTable } from '@/app/components/category/categoryTable';
+import { CategoryTable } from '@/components/category/categoryTable';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
