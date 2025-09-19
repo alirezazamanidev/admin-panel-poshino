@@ -14,7 +14,7 @@ interface PaginatedResponse<T> {
   data: T[];
   mutate: KeyedMutator<any>;
   isLoading: boolean;
-  error: any
+  error: any;
   meta: {
     totalCount: number;
     page: number;
@@ -22,7 +22,12 @@ interface PaginatedResponse<T> {
     pageCount: number;
   };
 }
-
+interface FeacherResponse<T> {
+  data: T;
+  mutate: KeyedMutator<any>;
+  isLoading: boolean;
+  error: any;
+}
 const fetcher = async (url: string) => {
   try {
     const response = await CallApi().get(url);
@@ -106,3 +111,13 @@ export function usePaginatedFeach<T>(
 //     mutate,
 //   };
 // }
+export function useFeacher<T>(
+  endpoint: string,
+  config = {},
+): FeacherResponse<T> {
+  const { data, error, isLoading, mutate } = useSWR(endpoint, fetcher, {
+    ...defaultConfig,
+    ...config,
+  });
+  return { data: data?.data?.data, error, isLoading, mutate };
+}
