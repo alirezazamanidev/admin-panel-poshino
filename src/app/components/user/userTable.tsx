@@ -16,7 +16,7 @@ export default function UserTable() {
         setPage(page);
     }
 
-    const { data, isLoading, error ,meta} = usePaginatedFeach<User>('/admin/user/list',{
+    const { data, isLoading, error ,meta,mutate} = usePaginatedFeach<User>('/admin/user/list',{
         page,
         limit: 5,
         search,
@@ -62,8 +62,15 @@ export default function UserTable() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {data?.map((user) => (
-                    <UserItem key={user.id} user={user} />
+                    <UserItem key={user.id} user={user} userMutate={mutate} />
                   ))}
+                  {
+                    error && (
+                      <div className="text-red-500 text-center">
+                        {error.message}
+                      </div>
+                    )
+                  }
                 </tbody>
               </table>
             </div>
@@ -75,7 +82,7 @@ export default function UserTable() {
                   نمایش {data?.length || 0} کاربر
                 </p>
                 <div className="flex items-center space-x-2 space-x-reverse">
-                  <PaginationComponent currentPage={meta?.page || 1} totalPages={meta?.totalPages || 1} onPageChange={onPageChange} />
+                  <PaginationComponent currentPage={meta?.page || 1} totalPages={meta?.pageCount || 1} onPageChange={onPageChange} />
                 </div>
               </div>
             </div>

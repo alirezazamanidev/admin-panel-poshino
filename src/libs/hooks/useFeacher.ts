@@ -16,10 +16,10 @@ interface PaginatedResponse<T> {
   isLoading: boolean;
   error: any
   meta: {
-    total: number;
+    totalCount: number;
     page: number;
     limit: number;
-    totalPages: number;
+    pageCount: number;
   };
 }
 
@@ -56,7 +56,6 @@ export function usePaginatedFeach<T>(
   });
 
   const url = `${endpoint}?${searchParams.toString()}`;
-
   const { data, error, isLoading, mutate } = useSWR(url, fetcher, {
     ...defaultConfig,
     ...config,
