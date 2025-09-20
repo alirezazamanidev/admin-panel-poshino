@@ -1,20 +1,9 @@
 'use client';
-import { useState } from 'react';
+
 import {
   LayoutDashboard,
-  Package,
-  Users,
-  FolderTree,
-  ShoppingCart,
-  Settings,
-  Menu,
-  X,
-  Home,
-  LogOut,
-  Bell,
-  Search,
+
 } from 'lucide-react';
-import HeaderLayout from '../../components/layouts/headerLayout';
 
 export default function AdminPanel() {
   return (
